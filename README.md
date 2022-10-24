@@ -8,7 +8,8 @@
 리액트라우터
 ![badge](https://img.shields.io/badge/Tailwind CSS-06B6D4?style=flat-square&logo=Tailwind CSS&logoColor=white)
 태일윈드
-![badge](https://camo.githubusercontent.com/6d9a9d9599dcff8d409c385c4204f2e1fe7956abb5f93df2508dda9e162341a2/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4b616b616f204170692d4646434430303f7374796c653d666f722d7468652d6261646765266c6f676f3d4b616b616f266c6f676f436f6c6f723d626c61636b)
+<img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=flat-square&logo=Tailwind CSS&logoColor=white"/>
+- Ubuntu
 유즈
 ![badge](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white)
 
