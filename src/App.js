@@ -1,15 +1,14 @@
 import { Route, Routes, useLocation, useParams } from "react-router-dom";
-
 import Layout from "./components/Layout";
 import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Enter from "./pages/Enter";
 import MeetingRoom from "./pages/MeetingRoom";
-
 import MakeMeeting from "./pages/MakeMeeting";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getMeetings, resetMeetings } from "./redux/modules/meetingsReducer";
+import "tailwindcss/tailwind.css";
 
 function App() {
   const { pathname } = useLocation();

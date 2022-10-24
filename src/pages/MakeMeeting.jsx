@@ -7,7 +7,8 @@ const MakeMeeting = () => {
   };
   const [previews, setPreviews] = useState({ contentUrls: [], selected: 0 });
   const { register, handleSubmit, watch, setValue } = useForm();
-  const photo = watch("photo");
+
+  const photo = watch("photo");//Filelist
   const onValid = console.log;
   const handleClickSmallPreview = (previewIndex) => () => {
     setPreviews((cur) => ({ ...cur, selected: previewIndex }));
@@ -15,17 +16,22 @@ const MakeMeeting = () => {
   // const handleClickSmallPreviewDelete = (previewIndex) => () => {
   //   setPreviews((cur) => ({ ...cur, selected: previewIndex }));
   // };
+
   useEffect(() => {
     setValue("photo", []);
   }, []);
+
   useEffect(() => {
     if (photo && photo.length > 0) {
+      // let files = ["file1", "file2"]
+      // URL.createObjectURL(files[0]);
       setPreviews((cur) => ({
         ...cur,
         contentUrls: [...[...photo].map((file) => URL.createObjectURL(file))],
       }));
     }
   }, [photo]);
+
   console.log(previews.contentUrls.length);
   return (
     <form className="flex flex-col gap-2" onSubmit={handleSubmit(onValid)}>
@@ -71,7 +77,6 @@ const MakeMeeting = () => {
             <input
               {...register("photo", {
                 validate: (photoList) => {
-                  console.log("list", photoList);
                   return photoList.length < 2;
                 },
               })}
