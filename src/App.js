@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import logo from "./logo.svg";
 // import "tailwindcss/tailwind.css";
 
@@ -15,14 +16,42 @@
 //}
 
 import { Route, Routes } from "react-router-dom";
+=======
+import { Route, Routes, useLocation, useParams } from "react-router-dom";
+>>>>>>> f4c20bcd95c272aec180645ab8bd98f6d4bf2061
 import Layout from "./components/Layout";
 import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
 import Enter from "./pages/Enter";
 import MeetingRoom from "./pages/MeetingRoom";
+<<<<<<< HEAD
 import "tailwindcss/tailwind.css";
 
 function App() {
+=======
+import MakeMeeting from "./pages/MakeMeeting";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getMeetings, resetMeetings } from "./redux/modules/meetingsReducer";
+
+function App() {
+  const { pathname } = useLocation();
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (pathname !== "/enter") {
+      dispatch(getMeetings());
+    } else {
+      dispatch(resetMeetings());
+    }
+  }, [pathname, dispatch]);
+  useEffect(() => {
+    return () => {
+      console.log("unmount");
+      localStorage.setItem("login", "false");
+    };
+  }, []);
+>>>>>>> f4c20bcd95c272aec180645ab8bd98f6d4bf2061
   return (
     <Layout>
       <Routes>
@@ -30,6 +59,10 @@ function App() {
         <Route path="enter" element={<Enter />} />
         <Route path="mypage" element={<Mypage />} />
         <Route path="meeting/:id" element={<MeetingRoom />} />
+<<<<<<< HEAD
+=======
+        <Route path="makemeeting" element={<MakeMeeting />} />
+>>>>>>> f4c20bcd95c272aec180645ab8bd98f6d4bf2061
       </Routes>
     </Layout>
   );
