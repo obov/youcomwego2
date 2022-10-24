@@ -13,9 +13,9 @@ const MakeMeeting = () => {
   const handleClickSmallPreview = (previewIndex) => () => {
     setPreviews((cur) => ({ ...cur, selected: previewIndex }));
   };
-  // const handleClickSmallPreviewDelete = (previewIndex) => () => {
-  //   setPreviews((cur) => ({ ...cur, selected: previewIndex }));
-  // };
+  const handleClickSmallPreviewDelete = (previewIndex) => () => {
+    setPreviews((cur) => ({ ...cur, selected: previewIndex }));
+  };
 
   useEffect(() => {
     setValue("photo", []);
@@ -23,16 +23,12 @@ const MakeMeeting = () => {
 
   useEffect(() => {
     if (photo && photo.length > 0) {
-      // let files = ["file1", "file2"]
-      // URL.createObjectURL(files[0]);
       setPreviews((cur) => ({
         ...cur,
         contentUrls: [...[...photo].map((file) => URL.createObjectURL(file))],
       }));
     }
   }, [photo]);
-
-  console.log(previews.contentUrls.length);
   return (
     <form className="flex flex-col gap-2" onSubmit={handleSubmit(onValid)}>
       <div className="flex justify-between">
