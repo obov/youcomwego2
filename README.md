@@ -21,14 +21,15 @@ VisualStudioCode Github
 
 ##😎 프론트엔드 팀원 소개
 
-이름	깃허브 주소
-임요한 https://github.com/obov/youcomwego2/tree/dev/src/pages
-방지식 https://github.com/jisic/reactTodolist.git
+|이름|깃허브 주소|
+|------|------|
+|임요한|(https://github.com/obov/youcomwego2/tree/dev/src/pages)|
+|방지식|(https://github.com/jisic/reactTodolist.git)|
 
 ##😎 백엔드 팀원 소개
-
-이름	깃허브 주소
-문종현(C) 
-유동희
-이승표
-정현진
+|이름|깃허브 주소|
+|------|------|
+|문종현(C)||
+|유동희||
+|이승표||
+|||
