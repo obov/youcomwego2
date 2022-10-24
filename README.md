@@ -14,9 +14,11 @@
 ##🛠 기술스택
 
 Front-end
+
 javaScript React Redux ReactRouter useForm Axios tailwind css
 
 Dev tools
+
 VisualStudioCode Github
 
 ##😎 프론트엔드 팀원 소개
@@ -33,3 +35,6 @@ VisualStudioCode Github
 |유동희||
 |이승표||
 |정현진||
+
+✨ 핵심 기능
+
