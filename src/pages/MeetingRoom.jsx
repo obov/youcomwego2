@@ -1,47 +1,38 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Comment from "../components/Comment";
+import { getMeetings } from "../redux/modules/meetingsReducer";
 
 const MeetingRoom = () => {
+  const meetings = useSelector((state) => state.meetings);
+  console.log(meetings);
   return (
-    <>
-      <div>
-        <h1>제목</h1>
-        <div style={{ display: "flex", height: 200 }}>
-          <div
-            style={{
-              flex: 2,
-              border: "solid 1px darkgreen",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <div>{"<"}</div>
-            <div>{">"}</div>
-          </div>
-          <div
-            style={{
-              flex: 3,
-              border: "solid 1px darkgreen",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <div style={{ flex: 4, border: "solid 1px darkseagreen" }}>
-              일시 장소 설명
-            </div>
-            <div style={{ flex: 1, border: "solid 1px darkseagreen" }}>
-              <button>좋아요</button>
-              <button>참여</button>
-            </div>
-          </div>
+    <div className="h-full">
+      <h1>제목</h1>
+      <div className="flex flex-col">
+        <div className="basis-1/3 flex justify-between items-center">
+          <div>{"<"}</div>
+          <img
+            width={200}
+            height={250}
+            src={"https://picsum.photos/200/250"}
+          ></img>
+          <div>{">"}</div>
+        </div>
+        <div className="border border-black">
+          <button>좋아요</button>
+          <button>참여</button>
+        </div>
+        <div>
+          <div className="border border-black h-40">일시 장소 설명</div>
         </div>
       </div>
       <div style={{ border: "solid 1px black" }}>
-        {[1, 2, 3, 4].map((e) => (
-          <Comment key={e} />
+        {meetings?.data?.map((e, i) => (
+          <Comment key={i} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

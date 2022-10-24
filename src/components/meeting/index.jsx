@@ -1,7 +1,14 @@
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { selectMeetings } from "../../redux/modules/meetingsReducer";
 
-const Meeting = ({ main, mypage }) => {
+const Meeting = ({ main, mypage, meeting }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    navigate("/meeting/" + meeting.meetingId);
+    dispatch(selectMeetings(meeting));
+  };
   if (main)
     return (
       <div
@@ -14,17 +21,15 @@ const Meeting = ({ main, mypage }) => {
           flexDirection: "column",
         }}
       >
-        모여라
-        <div
-          style={{
-            width: 150,
-            height: 200,
-            border: "solid 1px darkblue",
-            cursor: "pointer",
-          }}
-          onClick={() => navigate("/meeting/1")}
-        ></div>
-        모임장: 홍길동
+        {meeting.title}
+        <img
+          width={200}
+          height={250}
+          src={"https://picsum.photos/200/300"}
+          className="cursor-pointer"
+          onClick={handleClick}
+        ></img>
+        모임장: {meeting.nickname}
         <div style={{ display: "flex" }}>
           <div style={{ width: 120, height: 30, border: "solid 1px skyblue" }}>
             모임 이름
@@ -45,17 +50,15 @@ const Meeting = ({ main, mypage }) => {
           flexDirection: "column",
         }}
       >
-        모여라
-        <div
-          style={{
-            width: 150,
-            height: 200,
-            border: "solid 1px darkblue",
-            cursor: "pointer",
-          }}
-          onClick={() => navigate("/meeting/1")}
-        ></div>
-        모임장: 홍길동
+        {meeting.title}
+        <img
+          width={200}
+          height={250}
+          src={"https://picsum.photos/200/250"}
+          className="cursor-pointer"
+          onClick={handleClick}
+        ></img>
+        모임장: {meeting.nickname}
         <div style={{ display: "flex" }}>
           <div style={{ width: 120, height: 30, border: "solid 1px skyblue" }}>
             모임 이름

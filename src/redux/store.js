@@ -3,8 +3,13 @@ import {
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
+import comments from "./modules/commentsReducer";
+import meetings from "./modules/meetingsReducer";
 
 export default configureStore({
-  reducer: {},
+  reducer: {
+    meetings: meetings.reducer,
+    comments: comments.reducer,
+  },
   devTools: process.env.NODE_ENV === "development",
 });
