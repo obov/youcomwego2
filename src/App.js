@@ -10,6 +10,15 @@ import { useEffect } from "react";
 import { getMeetings, resetMeetings } from "./redux/modules/meetingsReducer";
 import "tailwindcss/tailwind.css";
 
+export const PATHS = {
+  INDEX: "/",
+  ENTER: "enter",
+  MYPAGE: "mypage",
+  MEETING: {
+    toString: () => "meeting",
+    MAKE: "meeting/make",
+  },
+};
 function App() {
   const { pathname } = useLocation();
 
@@ -21,20 +30,17 @@ function App() {
       dispatch(resetMeetings());
     }
   }, [pathname, dispatch]);
-  useEffect(() => {
-    return () => {
-      console.log("unmount");
-      localStorage.setItem("login", "false");
-    };
-  }, []);
+
   return (
     <Layout>
       <Routes>
         <Route index element={<Main />} />
         <Route path="enter" element={<Enter />} />
         <Route path="mypage" element={<Mypage />} />
-        <Route path="meeting/:id" element={<MeetingRoom />} />
-        <Route path="makemeeting" element={<MakeMeeting />} />
+        <Route path="meeting">
+          <Route path=":id" element={<MeetingRoom />} />
+          <Route path="make" element={<MakeMeeting />} />
+        </Route>
       </Routes>
     </Layout>
   );
