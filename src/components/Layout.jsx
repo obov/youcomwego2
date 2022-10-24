@@ -1,38 +1,19 @@
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
 // import {Diversity3Icon} from '@mui/icons-material/Diversity3';
-=======
->>>>>>> f4c20bcd95c272aec180645ab8bd98f6d4bf2061
 
 const Layout = ({ children }) => {
   const isDev = process.env.NODE_ENV === "development";
   const navigate = useNavigate();
   const handleClickLogo = () => {
-<<<<<<< HEAD
     navigate("/");
   };
   const handleClickMyPage = () => {
     navigate("/mypage");
-=======
-    if (localStorage.getItem("login") === "true") {
-      navigate("/");
-    }
-  };
-  const handleClickMyPage = () => {
-    if (localStorage.getItem("login") === "true") {
-      navigate("/mypage");
-    }
-  };
-  const handleClickLogout = () => {
-    localStorage.setItem("login", "false");
-    navigate("/enter");
->>>>>>> f4c20bcd95c272aec180645ab8bd98f6d4bf2061
   };
   return (
     <>
       {isDev ? (
         <>
-<<<<<<< HEAD
           <div className="h-20 fixed top-96 border border-red-900">
             <div>임시로 만든 부분입니다</div>
             <div className="flex gap-4">
@@ -40,63 +21,18 @@ const Layout = ({ children }) => {
               <button onClick={() => navigate("/enter")}>login</button>
               <button onClick={() => navigate("/mypage")}>mypage</button>
               <button onClick={() => navigate("/meeting/1")}>meeting</button>
-=======
-          <div className="fixed top-24 border border-red-900">
-            <div>임시로 만든 부분입니다</div>
-            <div className="flex flex-col gap-4">
-              <button
-                onClick={() =>
-                  localStorage.getItem("login") === "true" && navigate("/")
-                }
-              >
-                main
-              </button>
-              <button onClick={() => navigate("/enter")}>login</button>
-              <button
-                onClick={() =>
-                  localStorage.getItem("login") === "true" &&
-                  navigate("/mypage")
-                }
-              >
-                mypage
-              </button>
-              <button
-                onClick={() =>
-                  localStorage.getItem("login") === "true" &&
-                  navigate("/meeting/1")
-                }
-              >
-                meeting
-              </button>
-              <button
-                onClick={() =>
-                  localStorage.getItem("login") === "true" &&
-                  navigate("/makemeeting")
-                }
-              >
-                makemeeting
-              </button>
->>>>>>> f4c20bcd95c272aec180645ab8bd98f6d4bf2061
             </div>
           </div>
         </>
       ) : null}
-<<<<<<< HEAD
       <div className="bg-slate-50 w-full h-screen">
         <div className="w-1/2 h-full bg-zinc-100 mx-auto min-w-[300px] pt-14">
           <div className="fixed w-full bg-gray-800 h-15 top-0 left-0 ">
             <div className="w-1/2 px-11 flex mx-auto justify-between mt-3 min-w-[300px]">
-=======
-      <div className="bg-slate-50 w-full">
-        <div className="w-1/2 h-full bg-zinc-100 mx-auto min-w-[300px] pt-24">
-          <div className="fixed w-full bg-slate-800 h-20 top-0 left-0 z-10">
-            <div className="w-1/2 px-11 flex mx-auto items-center justify-between mt-3 min-w-[300px]">
->>>>>>> f4c20bcd95c272aec180645ab8bd98f6d4bf2061
               <div
                 className="text-white cursor-pointer"
                 onClick={handleClickLogo}
               >
-<<<<<<< HEAD
                 {/* <Diversity3Icon
                 size="24"
                 onClick={handleClickLogo}
@@ -120,35 +56,10 @@ const Layout = ({ children }) => {
             </div>
           </div>
           {children}
-=======
-                logo
-              </div>
-              <div>
-                <div
-                  className="text-white cursor-pointer"
-                  onClick={handleClickLogout}
-                >
-                  logout
-                </div>
-                <div
-                  className="text-white cursor-pointer"
-                  onClick={handleClickMyPage}
-                >
-                  mypage
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="w-[95%] mx-auto h-screen">{children}</div>
->>>>>>> f4c20bcd95c272aec180645ab8bd98f6d4bf2061
         </div>
       </div>
     </>
   );
 };
 
-<<<<<<< HEAD
 export default Layout;
-=======
-export default Layout;
->>>>>>> f4c20bcd95c272aec180645ab8bd98f6d4bf2061

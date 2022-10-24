@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import Comment from "../components/Comment";
 
 const MeetingRoom = () => {
@@ -53,35 +52,8 @@ const MeetingRoom = () => {
           <Comment key={e} />
         ))}
       </div>
-=======
-import React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Meeting from "../components/meeting";
-import { getMeetings } from "../redux/modules/meetingsReducer";
-
-const Mypage = () => {
-  const meetings = useSelector((state) => state.meetings);
-
-  return (
-    <>
-      {["좋아요", "참여"].map((e) => (
-        <React.Fragment key={e}>
-          {e}
-          <div style={{ display: "flex" }}>
-            {meetings.data?.map((e, i) => (
-              <Meeting key={i} mypage meeting={e} />
-            ))}
-          </div>
-        </React.Fragment>
-      ))}
->>>>>>> f4c20bcd95c272aec180645ab8bd98f6d4bf2061
     </>
   );
 };
 
-<<<<<<< HEAD
 export default MeetingRoom;
-=======
-export default Mypage;
->>>>>>> f4c20bcd95c272aec180645ab8bd98f6d4bf2061
