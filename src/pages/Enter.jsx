@@ -27,14 +27,14 @@ const Enter = () => {
         <form onSubmit={handleSubmit(onValid)}>
           <div className="flex flex-row justify-center">         
           <button
-            onClick={handleClick}
+            onClick={handleSubmit}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
           >
             로그인
           </button>
           <button
-            onClick={handleClick}
+            onClick={handleSubmitSignUp}
             className="bg-blue-500 hover:bg-green-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
           >
@@ -76,7 +76,7 @@ const Enter = () => {
             onClick={handleClick}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-80 py-2 px-2 
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-            >
+            >          
               {isLoging ? "로그인" : "가입하기"}
             </button>
           </div>
@@ -93,7 +93,7 @@ const Enter = () => {
             로그인
           </button>
           <button
-            onClick={handleClick}
+            onClick={handleSubmitSignUp}
             className="bg-blue-500 hover:bg-green-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
           >
@@ -165,13 +165,12 @@ const Enter = () => {
             />
             {errosSignUp.confirm?.message}
             <button
-            onClick={handleClick}
+            onClick={handleSubmitSignUp}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-80 py-2 px-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
             >
               가입하기
             </button>
-          </div>
-          
+          </div>         
         </form>
       )}
     </>

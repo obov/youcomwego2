@@ -97,7 +97,10 @@ const meetings = createSlice({
       return { data: [], selected: null };
     },
     selectMeetings: (state, action) => {
-      state.selected = action.payload;
+      const selected = state.data.find((meeting) => {
+        return meeting.meetingId === action.payload.meetingId;
+      });
+      state.selected = selected;
     },
   },
   extraReducers: (builder) => {
@@ -124,6 +127,7 @@ const meetings = createSlice({
     // builder.addCase(deleteTodo.rejected, (state, action) => {
     //   state.data.push(action.payload);
     //   state[action.payload.phase].push(action.payload);
+    //
     // });
 
     // builder.addCase(patchTodo.fulfilled, (state, action) => {

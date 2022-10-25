@@ -3,7 +3,6 @@ import { getMeetings } from "../redux/modules/meetingsReducer";
 import { cls } from "../utils/others";
 import { useDispatch, useSelector } from "react-redux";
 import Meeting from "../components/Meeting";
-
 const Main = ({ router }) => {
   const meetings = useSelector((state) => state.meetings.data);
   console.log(meetings);
