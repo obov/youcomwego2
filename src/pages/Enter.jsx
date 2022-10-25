@@ -25,8 +25,23 @@ const Enter = () => {
     <>
       {isLoging ? (
         <form onSubmit={handleSubmit(onValid)}>
-          <div className="flex flex-col">
+          <div className="flex flex-row justify-center">         
+          <button
+            onClick={handleClick}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
+            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          >
             로그인
+          </button>
+          <button
+            onClick={handleClick}
+            className="bg-blue-500 hover:bg-green-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
+            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          >
+            회원가입
+          </button>
+          </div>                 
+          <div className="flex flex-col items-center">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="username"
@@ -34,7 +49,8 @@ const Enter = () => {
               E_Mail
             </label>
             <input
-              className="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-80 py-2 px-3 
+              text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               type="text"
               placeholder="you@example.com"
@@ -48,33 +64,43 @@ const Enter = () => {
               Password
             </label>
             <input
-              className="shadow appearance-none border border-red-500 rounded w-80 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-red-500 rounded w-80 py-2 px-3 
+              text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               placeholder="************"
               {...register(...regOptEnter.password())}
             />
             {errors.password?.message}
+            <button
+            onClick={handleClick}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-80 py-2 px-2 
+            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+            >
+              {isLoging ? "로그인" : "가입하기"}
+            </button>
           </div>
-          {/* <button onClick={handleClick} className="py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline" type="button"> */}
+          
+        </form>
+      ) : (
+        <form onSubmit={handleSubmitSignUp(onValidSignUp)}>
+          <div className="flex flex-row justify-center">
           <button
             onClick={handleClick}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-60 py-2 px-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
+            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
           >
             로그인
           </button>
           <button
             onClick={handleClick}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-20 py-2 px-2 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+            className="bg-blue-500 hover:bg-green-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
+            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
           >
-            {/* className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#"> */}
-            {isLoging ? "회원가입" : "로그인"}
-          </button>
-        </form>
-      ) : (
-        <form onSubmit={handleSubmitSignUp(onValidSignUp)}>
-          <div className="flex flex-col">
             회원가입
+          </button>
+          </div>
+          <div className="flex flex-col items-center">           
             <label
               className="block text-gray-700 text-sm font-bold mb-1"
               htmlFor="username"
@@ -138,13 +164,14 @@ const Enter = () => {
               )}
             />
             {errosSignUp.confirm?.message}
-          </div>
-          <button
+            <button
             onClick={handleClick}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-80 py-2 px-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-          >
-            가입하기
-          </button>
+            >
+              가입하기
+            </button>
+          </div>
+          
         </form>
       )}
     </>

@@ -30,14 +30,15 @@ const MakeMeeting = () => {
     }
   }, [photo]);
   return (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit(onValid)}>
-      <div className="flex justify-between">
+    <form className="flex flex-col gap-2 mt-5" onSubmit={handleSubmit(onValid)}>
+      <div>
         <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 
+        text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           placeholder="제목을 입력해주세요"
           {...register("title")}
         />
-        <button type="text">submit</button>
       </div>
       <div className="flex flex-col h-full gap-2">
         <div className="basis-1/3 flex justify-between items-center">
@@ -117,6 +118,10 @@ const MakeMeeting = () => {
             placeholder="상세 설명란 입니다."
             className="resize-none h-full w-full"
           ></textarea>
+          <button className="bg-green-500 hover:bg-green-700 text-white font-bold rounded w-20 py-2 px-3
+              rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+          등록
+        </button>
         </div>
       </div>
     </form>
