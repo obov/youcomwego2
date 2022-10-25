@@ -1,21 +1,23 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Meeting from "../components/meeting";
+import Meeting from "../components/Meeting";
 import { getMeetings } from "../redux/modules/meetingsReducer";
 
 const Mypage = () => {
-  const meetings = useSelector((state) => state.meetings);
-
+  const { data } = useSelector((state) => state.meetings);
+  console.log(data);
   return (
     <>
       {["좋아요", "참여"].map((e) => (
         <React.Fragment key={e}>
           {e}
-          <div style={{ display: "flex" }}>
-            {meetings.data?.map((e, i) => (
-              <Meeting key={i} mypage meeting={e} />
-            ))}
+          <div className="overflow-auto">
+            <div className="flex w-fit gap-3 p-2">
+              {data.map((meeting, i) => (
+                <Meeting key={i} mypage meeting={meeting} />
+              ))}
+            </div>
           </div>
         </React.Fragment>
       ))}
