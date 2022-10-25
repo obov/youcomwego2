@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "../App";
-// import {Diversity3Icon} from '@mui/icons-material/Diversity3';
 
 const Layout = ({ children }) => {
   const isDev = process.env.NODE_ENV === "development";
@@ -81,16 +80,25 @@ const Layout = ({ children }) => {
                   onClick={handleClickLogOut}
                 >
                   <div className="group w-10 h-10 bg-gray-800 rounded-md shadow-lg flex flex-row hover:bg-red-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
-                      <path fillRule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-8 h-8"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 
                       0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm10.72 4.72a.75.75 
-                      0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H9a.75.75 0 010-1.5h10.94l-1.72-1.72a.75.75 0 010-1.06z" clipRule="evenodd" />
+                      0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H9a.75.75 0 010-1.5h10.94l-1.72-1.72a.75.75 0 010-1.06z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                     {/* <h2 class="font-sans hover:font-serif">로그아웃</h2> */}
                   </div>
                 </div>
-                </div>
               </div>
+            </div>
           </div>
           {children}
         </div>
