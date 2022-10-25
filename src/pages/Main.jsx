@@ -1,7 +1,4 @@
-import { useEffect } from "react";
-import { getMeetings } from "../redux/modules/meetingsReducer";
-import { cls } from "../utils/others";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Meeting from "../components/Meeting";
 const Main = ({ router }) => {
   const meetings = useSelector((state) => state.meetings.data);
@@ -21,15 +18,4 @@ const Main = ({ router }) => {
   );
 };
 
-// const Main = () => {
-//   return (
-//     <div className="flex justify-between">
-//       <div> {"<"} </div>
-//       <Meetings />
-//       <div> {">"} </div>
-//     </div>
-//   );
-// };
-
 export default Main;
-
