@@ -3,12 +3,21 @@ import { useForm } from "react-hook-form";
 import { regOptEnter } from "../utils/validate";
 import { useDispatch } from "react-redux";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useNavigation } from "react-router-dom";
+import Kakao from "../icons/kakao";
+import Google from "../icons/google";
+import axios from "axios";
 
 const Enter = () => {
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+  const navigate = useNavigate();
   const { postLogin, isAuth, postSignup } = useAuth();
   const dispatch = useDispatch();
   const [isLoging, setIsLoging] = useState(true);
+  const handleClickKakao = () => {
+    window.location.href = apiBaseUrl + "kakao";
+    
+  };
   const handleClick = () => {
     setIsLoging(!isLoging);
   };
@@ -189,8 +198,16 @@ const Enter = () => {
           </div>
         </form>
       )}
+      <div className="w-3/4 mt-4 mx-auto flex justify-around">
+        <Kakao onClick={handleClickKakao} />
+        <Google />
+      </div>
     </>
   );
 };
 
 export default Enter;
+// async () => {
+//             const res = await axios(apiBaseUrl + "kakao");
+//             console.log(res);
+//           }

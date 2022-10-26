@@ -3,18 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Comment from "../components/Comment";
 import { useEffect } from "react";
 import { selectMeetings } from "../redux/modules/meetingsReducer";
+import { useState } from "react";
+import axios from "axios";
 
 const MeetingRoom = () => {
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
   const { id } = useParams();
   const dispatch = useDispatch();
   const meetings = useSelector((state) => state.meetings);
-  useEffect(() => {
-    if (meetings.data.length > 0 && !meetings.selected) {
-      dispatch(selectMeetings({ meetingId: +id }));
-    }
-  }, [meetings]);
-  const { selected } = meetings;
-  const comments = [
+  const initComments = [
     {
       commentId: 1,
       meetingId: 1,
@@ -37,6 +34,17 @@ const MeetingRoom = () => {
       content: "댓글입니다",
     },
   ];
+  const [comments, setComments] = useState(initComments);
+  useEffect(() => {
+    if (meetings.data.length > 0 && !meetings.selected) {
+      dispatch(selectMeetings({ meetingId: +id }));
+    }
+  }, [meetings]);
+  useEffect(async () => {
+    const { data } = await axios(apiBaseUrl + "comments/");
+  }, []);
+  const { selected } = meetings;
+
   console.log(selected);
   return (
     <div className="flex flex-col gap-2 px-2">
