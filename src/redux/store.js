@@ -5,7 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import comments from "./modules/commentsReducer";
 import meetings from "./modules/meetingsReducer";
-import me from "./modules/userReducer";
+import me from "./modules/meReducer";
 
 export default configureStore({
   reducer: {

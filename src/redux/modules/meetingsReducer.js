@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { setGroups, setStatus } from "../util";
+import axios from "axios";
+import { getToken, setGroups, setStatus } from "../util";
 
 const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -41,9 +42,12 @@ const initialMeetings = [
 export const getMeetings = createAsyncThunk(
   "meetingsReducer/getMeetings",
   async () => {
-    // const data = await (await fetch(apiBaseUrl + "meetings")).json();
-    // return data;
-    return initialMeetings;
+    const data = await (
+      await fetch(apiBaseUrl + "meetings", {
+        headers: { Auth: JSON.stringify(getToken()) },
+      })
+    ).json();
+    return data;
   }
 );
 

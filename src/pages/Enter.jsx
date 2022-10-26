@@ -1,11 +1,24 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { regOptEnter } from "../utils/validate";
+import { useDispatch } from "react-redux";
+import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Enter = () => {
+  const { postLogin, isAuth, postSignup } = useAuth();
+  const dispatch = useDispatch();
   const [isLoging, setIsLoging] = useState(true);
   const handleClick = () => {
     setIsLoging(!isLoging);
+  };
+  const handleClickLogin = (e) => {
+    e.preventDefault();
+    setIsLoging(true);
+  };
+  const handleClickSiginup = (e) => {
+    e.preventDefault();
+    setIsLoging(false);
   };
   const {
     register,
@@ -19,28 +32,33 @@ const Enter = () => {
     formState: { errors: errosSignUp },
   } = useForm();
   const password = watch("password");
-  const onValid = console.log;
-  const onValidSignUp = console.log;
+  const onValid = (data) => {
+    postLogin(data);
+  };
+  const onValidSignUp = (data) => {
+    console.log("data : ", data);
+    postSignup(data);
+  };
   return (
     <>
       {isLoging ? (
         <form onSubmit={handleSubmit(onValid)}>
-          <div className="flex flex-row justify-center">         
-          <button
-            onClick={handleSubmit}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
+          <div className="flex flex-row justify-center">
+            <button
+              onClick={handleClickLogin}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-          >
-            로그인
-          </button>
-          <button
-            onClick={handleSubmitSignUp}
-            className="bg-blue-500 hover:bg-green-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
+            >
+              로그인
+            </button>
+            <button
+              onClick={handleClickSiginup}
+              className="bg-blue-500 hover:bg-green-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-          >
-            회원가입
-          </button>
-          </div>                 
+            >
+              회원가입
+            </button>
+          </div>
           <div className="flex flex-col items-center">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -73,34 +91,32 @@ const Enter = () => {
             />
             {errors.password?.message}
             <button
-            onClick={handleClick}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-80 py-2 px-2 
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-80 py-2 px-2 
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-            >          
+            >
               {isLoging ? "로그인" : "가입하기"}
             </button>
           </div>
-          
         </form>
       ) : (
         <form onSubmit={handleSubmitSignUp(onValidSignUp)}>
           <div className="flex flex-row justify-center">
-          <button
-            onClick={handleClick}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
+            <button
+              onClick={handleClick}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-          >
-            로그인
-          </button>
-          <button
-            onClick={handleSubmitSignUp}
-            className="bg-blue-500 hover:bg-green-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
+            >
+              로그인
+            </button>
+            <button
+              onClick={handleSubmitSignUp}
+              className="bg-blue-500 hover:bg-green-700 text-white font-bold rounded w-40 py-2 px-3 mt-10
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-          >
-            회원가입
-          </button>
+            >
+              회원가입
+            </button>
           </div>
-          <div className="flex flex-col items-center">           
+          <div className="flex flex-col items-center">
             <label
               className="block text-gray-700 text-sm font-bold mb-1"
               htmlFor="username"
@@ -165,12 +181,12 @@ const Enter = () => {
             />
             {errosSignUp.confirm?.message}
             <button
-            onClick={handleSubmitSignUp}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-80 py-2 px-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+              onClick={handleSubmitSignUp}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-80 py-2 px-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
             >
               가입하기
             </button>
-          </div>         
+          </div>
         </form>
       )}
     </>

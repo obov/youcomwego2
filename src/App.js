@@ -1,4 +1,10 @@
-import { Route, Routes, useLocation, useParams } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import Layout from "./components/Layout";
 import Main from "./pages/Main";
 import Mypage from "./pages/Mypage";
@@ -6,9 +12,10 @@ import Enter from "./pages/Enter";
 import MeetingRoom from "./pages/MeetingRoom";
 import MakeMeeting from "./pages/MakeMeeting";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { getMeetings, resetMeetings } from "./redux/modules/meetingsReducer";
 import "tailwindcss/tailwind.css";
+import useAuth from "./hooks/useAuth";
 
 export const PATHS = {
   INDEX: "/",
@@ -20,17 +27,22 @@ export const PATHS = {
   },
 };
 function App() {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
-
+  const { isAuth } = useAuth();
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (pathname !== "/enter") {
-      dispatch(getMeetings());
-    } else {
-      dispatch(resetMeetings());
+  // useEffect(() => {
+  //   if (pathname !== "/enter") {
+  //     dispatch(getMeetings());
+  //   } else {
+  //     dispatch(resetMeetings());
+  //   }
+  // }, [pathname, dispatch]);
+  useLayoutEffect(() => {
+    if (!isAuth) {
+      navigate("/enter", { replace: true });
     }
-  }, [pathname, dispatch]);
-
+  }, [isAuth, pathname]);
   return (
     <Layout>
       <Routes>

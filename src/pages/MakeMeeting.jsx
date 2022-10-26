@@ -30,7 +30,10 @@ const MakeMeeting = () => {
     }
   }, [photo]);
   return (
-    <form className="flex flex-col gap-2 px-2" onSubmit={handleSubmit(onValid)}>
+    <form
+      className="flex flex-col gap-2 px-2 mt-2"
+      onSubmit={handleSubmit(onValid)}
+    >
       <div className="flex justify-between">
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 
@@ -39,6 +42,7 @@ const MakeMeeting = () => {
           placeholder="제목을 입력해주세요"
           {...register("title")}
         />
+        <button className="">submit</button>
       </div>
       <div className="basis-1/3 flex justify-between items-center">
         {/* {previews.contentUrls.length !== 0 ? ( */}
