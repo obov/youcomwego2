@@ -83,6 +83,20 @@ const MeetingRoom = () => {
             등록
           </button>
         </div>
+        <div className="flex flex-row justify-center gap-2 mt-2">
+          <button onClick={""}
+            className="bg-gray-800 hover:bg-black text-white font-bold w-10
+            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          >          
+            수정
+          </button>
+          <button onClick={""}
+            className="bg-gray-800 hover:bg-black text-white font-bold w-10
+            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          >          
+            삭제
+          </button>
+        </div>  
       </div>
     </div>
   );

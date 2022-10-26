@@ -82,8 +82,7 @@ const Enter = () => {
               type="text"
               placeholder="you@example.com"
               {...register(...regOptEnter.email())}
-            />
-            
+            />            
 
             {errors.email?.message}
             <label
@@ -203,10 +202,14 @@ const Enter = () => {
           </div>
         </form>
       )}
-      <div className="w-3/4 mt-4 mx-auto flex justify-around">
-        <Kakao onClick={handleClickKakao} />
-        <Google />
-      </div>
+        <div className="bg-gray-100 flex flex-col text-gray-700 text-sm font-bold items-center border-2 border-blue-500 shadow-md shadow-gray-600 mx-auto w-[90%] py-4 rounded">
+          *소셜계정으로 간편 로그인*
+          <div className="w-3/4 mt-4 mx-auto flex justify-around">
+            <Kakao onClick={handleClickKakao} />
+            <Google />
+          </div>
+        </div>
+        
     </>
   );
 };
