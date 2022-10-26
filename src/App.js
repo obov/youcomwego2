@@ -39,6 +39,7 @@ function App() {
       dispatch(resetMeetings());
     }
   }, [pathname, dispatch]);
+  // 테스트할때는 주석처리
   useLayoutEffect(() => {
     if (!isAuth) {
       navigate("/enter", { replace: true });

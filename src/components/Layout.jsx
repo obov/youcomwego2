@@ -17,7 +17,8 @@ const Layout = ({ children }) => {
   const handleClickLogOut = () => {
     removeTokens();
   };
-  // useEffect(() => {
+
+  //useEffect(() => {
   //   if (!isAuth) {
   //     navigate(PATHS.ENTER);
   //   } else {

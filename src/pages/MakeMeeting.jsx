@@ -42,7 +42,12 @@ const MakeMeeting = () => {
           placeholder="제목을 입력해주세요"
           {...register("title")}
         />
-        <button className="">submit</button>
+        <button 
+            className="bg-gray-800 hover:bg-black text-white font-bold w-[50px]
+            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+        >          
+          등록
+        </button>
       </div>
       <div className="basis-1/3 flex justify-between items-center">
         {/* {previews.contentUrls.length !== 0 ? ( */}
@@ -121,12 +126,6 @@ const MakeMeeting = () => {
           className="resize-none h-full w-full"
         ></textarea>
       </div>
-      <button 
-        className="bg-gray-800 hover:bg-black text-white font-bold w-20 py-2 px-2 
-        rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-      >          
-        등록
-      </button>
     </form>
   );
 };

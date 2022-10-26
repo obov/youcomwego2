@@ -6,6 +6,37 @@ import { getMeetings } from "../redux/modules/meetingsReducer";
 
 const Mypage = () => {
   const { data } = useSelector((state) => state.meetings);
+  // 테스트용
+  // const data = [{
+  //   meetingId: 1, 
+  //   userId: 1,
+  //   nickname : `test`,
+  //   title : `너만 오면`,
+  //   likeCount : 1,
+  //   participateCount : 3,
+    
+  //   Like:[
+  //    {
+  //   meetingId : 1,
+  //   userId : 1,
+  //    }
+  //   ]
+  //  },
+  //  {
+  //   meetingId : 2, 
+  //   userId: 1,
+  //   nickname : `test`,
+  //   title : `너가 안오면`,
+  //   likeCount : 1, 
+  //   participateCount : 0,
+    
+  //   Like:[
+  //    {
+  //   meetingId : 2,
+  //   userId : 1,
+  //    }
+  //  ]
+  //  },]
   console.log(data);
   return (
     <>
