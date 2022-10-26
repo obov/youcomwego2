@@ -37,6 +37,12 @@ const Main = ({ router }) => {
   return (
     <div className="flex justify-between">
       <div className="w-full overflow-auto">
+          <button onClick={""}
+            className="bg-gray-800 hover:bg-black text-white font-bold w-20 h-9 mt-2 
+            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          >          
+            글쓰기
+          </button>
         <div className="flex w-fit gap-3 p-2">
           {meetings.map((meeting) => (
             <Meeting key={meeting.meetingId} main meeting={meeting} />
