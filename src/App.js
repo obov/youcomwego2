@@ -32,13 +32,13 @@ function App() {
   const { pathname } = useLocation();
   const { isAuth } = useAuth();
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (pathname !== "/enter") {
-      dispatch(getMeetings());
-    } else {
-      dispatch(resetMeetings());
-    }
-  }, [pathname, dispatch]);
+  // useEffect(() => {
+  //   if (pathname !== "/enter") {
+  //     dispatch(getMeetings());
+  //   } else {
+  //     dispatch(resetMeetings());
+  //   }
+  // }, [pathname, dispatch]);
   // 테스트할때는 주석처리
   useLayoutEffect(() => {
     if (!isAuth) {

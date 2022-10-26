@@ -4,15 +4,14 @@ import useAuth from "../hooks/useAuth";
 import Bad from "./Bad";
 
 const SocialLanding = () => {
-  const { isAuth } = useAuth();
+  const { isAuth, setTokens } = useAuth();
   const { tokens } = useParams();
-  const { setTokens } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     if (isAuth) {
       navigate("/");
     }
-  }, [navigate]);
+  }, [navigate, isAuth]);
   try {
     const [[, acc], [, ref]] = tokens.split("@").map((e) => e.split("="));
     setTokens(acc, ref);

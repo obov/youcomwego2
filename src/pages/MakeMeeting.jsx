@@ -1,5 +1,7 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import useAuth from "../hooks/useAuth";
 
 const MakeMeeting = () => {
   const handleClickTitleEdit = () => {
@@ -7,14 +9,34 @@ const MakeMeeting = () => {
   };
   const [previews, setPreviews] = useState({ contentUrls: [], selected: 0 });
   const { register, handleSubmit, watch, setValue } = useForm();
+  const { getTokens } = useAuth();
+  const headers = { Auth: JSON.stringify(getTokens) };
 
   const photo = watch("photo"); //Filelist
-  const onValid = console.log;
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+  const onValid = async (payload) => {
+    const { data } = await axios.post(apiBaseUrl + "meetings", payload, {
+      headers,
+    });
+    if (data.message === "게시글이 생성되었습니다") {
+    }
+    console.log("res : ", data); //API를 바꿔야할듯?
+  };
   const handleClickSmallPreview = (previewIndex) => () => {
     setPreviews((cur) => ({ ...cur, selected: previewIndex }));
   };
   const handleClickSmallPreviewDelete = (previewIndex) => () => {
-    setPreviews((cur) => ({ ...cur, selected: previewIndex }));
+    setPreviews((cur) => ({
+      ...cur,
+      contentUrls: [
+        ...cur.contentUrls.slice(0, previewIndex),
+        ...cur.contentUrls.slice(previewIndex + 1),
+      ],
+    }));
+    setValue("photo", [
+      ...[...photo].slice(0, previewIndex),
+      ...[...photo].slice(previewIndex + 1),
+    ]);
   };
 
   useEffect(() => {
@@ -42,23 +64,22 @@ const MakeMeeting = () => {
           placeholder="제목을 입력해주세요"
           {...register("title")}
         />
-        <button 
-            className="bg-gray-800 hover:bg-black text-white font-bold w-[50px]
+        <button
+          className="bg-gray-800 hover:bg-black text-white font-bold w-[50px]
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-        >          
+        >
           등록
         </button>
       </div>
-      <div className="basis-1/3 flex justify-between items-center">
-        {/* {previews.contentUrls.length !== 0 ? ( */}
-        <div className="relative">
+      <div className="basis-1/3 flex relative">
+        {previews.contentUrls.length !== 0 ? (
           <img
             layout="fill"
             src={previews.contentUrls[previews.selected]}
-            className="w-full text-gray-600 h-48 rounded-md object-cover"
+            className="w-full absolute text-gray-600 h-48 rounded-3xl object-contain"
             alt=""
           />
-        </div>
+        ) : null}
         <label
           className={`w-full cursor-pointer text-gray-600 hover:bg-slate-600 hover:text-slate-200 flex items-center justify-center border-2 border-dashed border-gray-300 h-48 rounded-md ${
             previews.contentUrls.length !== 0 && "opacity-0 pointer-events-none"
@@ -90,15 +111,30 @@ const MakeMeeting = () => {
           />
         </label>
       </div>
-      <div className="h-20 border border-emerald-800 flex">
+      <div className="h-20 border border-emerald-800 flex items-center px-2 gap-2">
         {previews.contentUrls.length !== 0 &&
           previews.contentUrls.map((url, i) => (
-            <div className="relative group cursor-pointer">
-              <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 hover:ring-2 hover:ring-pink-400 ease-in cursor-pointer">
-                X
+            <div className="relative group cursor-pointer" key={url + i}>
+              <div
+                onClick={handleClickSmallPreviewDelete(i)}
+                className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 hover:ring-2 hover:ring-black ease-in cursor-pointer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={6}
+                  stroke="currentColor"
+                  className="w-2 h-2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
               </div>
               <img
-                key={url + i}
                 layout="fill"
                 src={url}
                 className="w-16 text-gray-600 h-16 rounded-md object-cover"
@@ -107,8 +143,22 @@ const MakeMeeting = () => {
               />
             </div>
           ))}
-        <label className="w-6 h-6 bg-slate-300 flex justify-center items-center cursor-pointer">
-          +
+        <label className="w-6 h-6 flex justify-center items-center cursor-pointer text-zinc-400 hover:text-slate-200 rounded hover:bg-slate-600">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 6v12m6-6H6"
+            />
+          </svg>
+
           <input
             onInput={({ target }) => {
               setValue("photo", [...photo, ...target.files]);

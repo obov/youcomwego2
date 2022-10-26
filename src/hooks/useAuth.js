@@ -9,7 +9,10 @@ const useAuth = () => {
     )
   );
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
-
+  const getTokens = {
+    accessToken: localStorage.getItem("accessToken"),
+    refreshToken: localStorage.getItem("refreshToken"),
+  };
   const setTokens = (accessToken, refreshToken) => {
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("refreshToken", refreshToken);
@@ -45,7 +48,7 @@ const useAuth = () => {
   useEffect(() => {
     console.log(isAuth);
   }, [isAuth]);
-  return { isAuth, postLogin, postSignup, removeTokens, setTokens };
+  return { isAuth, postLogin, postSignup, removeTokens, setTokens, getTokens };
 };
 
 export default useAuth;
