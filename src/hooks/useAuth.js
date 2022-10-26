@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const useAuth = () => {
   const [isAuth, setIsAuth] = useState(
-    localStorage.getItem("accessToken") && localStorage.getItem("refreshToken")
+    Boolean(
+      localStorage.getItem("accessToken") &&
+        localStorage.getItem("refreshToken")
+    )
   );
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -40,8 +42,10 @@ const useAuth = () => {
       setIsAuth(false);
     }
   }, 300);
-
-  return { isAuth, postLogin, postSignup, removeTokens };
+  useEffect(() => {
+    console.log(isAuth);
+  }, [isAuth]);
+  return { isAuth, postLogin, postSignup, removeTokens, setTokens };
 };
 
 export default useAuth;

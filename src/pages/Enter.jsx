@@ -15,8 +15,9 @@ const Enter = () => {
   const dispatch = useDispatch();
   const [isLoging, setIsLoging] = useState(true);
   const handleClickKakao = async () => {
-    const res = await (await fetch(apiBaseUrl + "kakao")).json();
-    console.log(res);
+    // const res = await (await fetch(apiBaseUrl + "kakao")).json();
+    // console.log(res);
+    window.location.href = apiBaseUrl + "kakao";
   };
   const handleClick = () => {
     setIsLoging(!isLoging);
@@ -52,61 +53,60 @@ const Enter = () => {
     <>
       {isLoging ? (
         <form onSubmit={handleSubmit(onValid)}>
-          <div className="flex flex-row justify-center gap-2 mt-2">                    
-          <input
-          type="button"
-          value="로그인"
-          className="bg-blue-500 text-white font-extrabold w-40 py-2 px-3 mt-10
+          <div className="flex flex-row justify-center gap-2 mt-2">
+            <input
+              type="button"
+              value="로그인"
+              className="bg-blue-500 text-white font-extrabold w-40 py-2 px-3 mt-10
           pointer-events-none rounded-t-lg text-xs"
-          />
-          <input
-            type="button"
-            value="회원가입"
-            onClick={handleClick}
-            className="bg-slate-500 hover:text-slate-100 font-bold w-40 py-2 px-3 mt-10
+            />
+            <input
+              type="button"
+              value="회원가입"
+              onClick={handleClick}
+              className="bg-slate-500 hover:text-slate-100 font-bold w-40 py-2 px-3 mt-10
             cursor-pointer rounded-t-lg shadow-md text-xs"
-          />
-          </div>                 
+            />
+          </div>
           <div className="bg-gray-100 flex flex-col items-center border-2 border-blue-500 shadow-md shadow-gray-600 mx-auto w-[90%] py-4 rounded">
             <div className="h-48 flex flex-col justify-center gap-2">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
-            >
-              E_Mail
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-80 py-2 px-3 mb-1
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="username"
+              >
+                E_Mail
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-80 py-2 px-3 mb-1
               text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
-              type="text"
-              placeholder="you@example.com"
-              {...register(...regOptEnter.email())}
-            />
-            
+                id="username"
+                type="text"
+                placeholder="you@example.com"
+                {...register(...regOptEnter.email())}
+              />
 
-            {errors.email?.message}
-            <label
-              className="block text-gray-700 text-sm font-bold mt-2 mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              className="shadow appearance-none border border-red-500 rounded w-80 py-2 px-3 mb-1
+              {errors.email?.message}
+              <label
+                className="block text-gray-700 text-sm font-bold mt-2 mb-2"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="shadow appearance-none border border-red-500 rounded w-80 py-2 px-3 mb-1
               text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="************"
-              {...register(...regOptEnter.password())}
-            />
-            
-            {errors.password?.message}
+                id="password"
+                type="password"
+                placeholder="************"
+                {...register(...regOptEnter.password())}
+              />
+
+              {errors.password?.message}
             </div>
             <button
-            className="bg-gray-800 hover:bg-black text-white font-bold w-80 py-2 px-2 mt-3
+              className="bg-gray-800 hover:bg-black text-white font-bold w-80 py-2 px-2 mt-3
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-            >          
+            >
               {isLoging ? "로그인" : "가입하기"}
             </button>
           </div>
@@ -128,7 +128,7 @@ const Enter = () => {
               rounded-t-lg shadow-md text-xs"
             />
           </div>
-          <div className="bg-gray-100 flex flex-col items-center border-2 border-blue-500 shadow-md shadow-gray-600 mx-auto w-[90%] py-4 rounded">           
+          <div className="bg-gray-100 flex flex-col items-center border-2 border-blue-500 shadow-md shadow-gray-600 mx-auto w-[90%] py-4 rounded">
             <div className="h-80 flex flex-col justify-center gap-2">
               <label
                 className="text-gray-700 text-sm font-bold flex flex-col mt-1 gap-0.5"
@@ -195,9 +195,10 @@ const Enter = () => {
               {errosSignUp.confirm?.message}
             </div>
             <button
-            onClick={handleSubmitSignUp}
-            className="bg-gray-700 hover:bg-black text-white font-bold w-80 py-2 px-2 
-            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+              onClick={handleSubmitSignUp}
+              className="bg-gray-700 hover:bg-black text-white font-bold w-80 py-2 px-2 
+            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+            >
               가입하기
             </button>
           </div>

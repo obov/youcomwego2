@@ -42,12 +42,12 @@ const initialMeetings = [
 export const getMeetings = createAsyncThunk(
   "meetingsReducer/getMeetings",
   async () => {
-    const data = await (
-      await fetch(apiBaseUrl + "meetings", {
-        headers: { Auth: JSON.stringify(getToken()) },
-      })
-    ).json();
-    return data;
+    // const data = await (
+    //   await fetch(apiBaseUrl + "meetings", {
+    //     headers: { Auth: JSON.stringify(getToken()) },
+    //   })
+    // ).json();
+    // return data;
   }
 );
 

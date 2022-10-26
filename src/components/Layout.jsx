@@ -17,13 +17,13 @@ const Layout = ({ children }) => {
   const handleClickLogOut = () => {
     removeTokens();
   };
-  useEffect(() => {
-    if (!isAuth) {
-      navigate(PATHS.ENTER);
-    } else {
-      navigate(PATHS.INDEX);
-    }
-  }, [isAuth]);
+  // useEffect(() => {
+  //   if (!isAuth) {
+  //     navigate(PATHS.ENTER);
+  //   } else {
+  //     navigate(PATHS.INDEX);
+  //   }
+  // }, [isAuth]);
   return (
     <>
       {isDev ? (
