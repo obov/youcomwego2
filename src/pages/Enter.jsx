@@ -14,9 +14,9 @@ const Enter = () => {
   const { postLogin, isAuth, postSignup } = useAuth();
   const dispatch = useDispatch();
   const [isLoging, setIsLoging] = useState(true);
-  const handleClickKakao = () => {
-    window.location.href = apiBaseUrl + "kakao";
-    
+  const handleClickKakao = async () => {
+    const res = await (await fetch(apiBaseUrl + "kakao")).json();
+    console.log(res);
   };
   const handleClick = () => {
     setIsLoging(!isLoging);
