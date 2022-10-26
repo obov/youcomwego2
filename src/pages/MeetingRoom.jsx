@@ -73,7 +73,16 @@ const MeetingRoom = () => {
         {comments.map((comment) => (
           <Comment {...comment} />
         ))}
-        <input type="text" />
+        <div className="flex flex-row justify-center gap-2 mt-2">
+          <input className="w-full py-2 px-3"
+          type="text" />
+          <button 
+            className="bg-gray-800 hover:bg-black text-white font-bold w-10
+            rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          >          
+            등록
+          </button>
+        </div>
       </div>
     </div>
   );

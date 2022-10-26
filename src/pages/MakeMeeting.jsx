@@ -121,6 +121,12 @@ const MakeMeeting = () => {
           className="resize-none h-full w-full"
         ></textarea>
       </div>
+      <button 
+        className="bg-gray-800 hover:bg-black text-white font-bold w-20 py-2 px-2 
+        rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+      >          
+        등록
+      </button>
     </form>
   );
 };
