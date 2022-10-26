@@ -40,8 +40,12 @@ const MeetingRoom = () => {
       dispatch(selectMeetings({ meetingId: +id }));
     }
   }, [meetings]);
-  useEffect(async () => {
-    const { data } = await axios(apiBaseUrl + "comments/");
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios(apiBaseUrl + "comments/", {
+        withCredentials: true,
+      });
+    })();
   }, []);
   const { selected } = meetings;
 

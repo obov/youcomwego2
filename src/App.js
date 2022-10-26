@@ -53,6 +53,9 @@ function App() {
           <Route path=":id" element={<MeetingRoom />} />
           <Route path="make" element={<MakeMeeting />} />
         </Route>
+        <Route path="kakao">// add.com/kakao/ioncfwoeihfnihnei
+          <Route path=":id" element={<MeetingRoom />} />
+        </Route>
       </Routes>
     </Layout>
   );

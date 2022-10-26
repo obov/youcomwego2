@@ -15,8 +15,11 @@ const Enter = () => {
   const dispatch = useDispatch();
   const [isLoging, setIsLoging] = useState(true);
   const handleClickKakao = async () => {
-    const res = await (await fetch(apiBaseUrl + "kakao")).json();
-    console.log(res);
+    // const res = await (
+    //   await fetch(apiBaseUrl + "kakao", { credentials: "include" })
+    // ).json();
+    // console.log(res);
+    window.location.href = apiBaseUrl + "kakao";
   };
   const handleClick = () => {
     setIsLoging(!isLoging);
