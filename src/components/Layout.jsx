@@ -17,13 +17,14 @@ const Layout = ({ children }) => {
   const handleClickLogOut = () => {
     removeTokens();
   };
-  useEffect(() => {
-    if (!isAuth) {
-      navigate(PATHS.ENTER);
-    } else {
-      navigate(PATHS.INDEX);
-    }
-  }, [isAuth]);
+
+  //useEffect(() => {
+  //   if (!isAuth) {
+  //     navigate(PATHS.ENTER);
+  //   } else {
+  //     navigate(PATHS.INDEX);
+  //   }
+  // }, [isAuth]);
   return (
     <>
       {isDev ? (
@@ -46,7 +47,7 @@ const Layout = ({ children }) => {
       ) : null}
       <div className="bg-slate-50 w-full h-[150vh]">
         <div className="w-1/2 h-full bg-zinc-100 mx-auto min-w-[300px] pt-20">
-          <div className="fixed w-full bg-gray-800 h-20 top-0 left-0 ">
+          <div className="fixed w-full bg-gray-800 h-20 top-0 left-0 z-10">
             <div className="px-11 flex mx-auto justify-between mt-3 min-w-[300px]">
               <div
                 className="text-white cursor-pointer flex flex-col items-center"

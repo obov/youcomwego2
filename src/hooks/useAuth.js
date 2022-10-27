@@ -1,13 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const useAuth = () => {
   const [isAuth, setIsAuth] = useState(
-    localStorage.getItem("accessToken") && localStorage.getItem("refreshToken")
+    Boolean(
+      localStorage.getItem("accessToken") &&
+        localStorage.getItem("refreshToken")
+    )
   );
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
-
+  const getTokens = {
+    accessToken: localStorage.getItem("accessToken"),
+    refreshToken: localStorage.getItem("refreshToken"),
+  };
   const setTokens = (accessToken, refreshToken) => {
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("refreshToken", refreshToken);
@@ -21,7 +26,14 @@ const useAuth = () => {
     }
   };
   const postSignup = async (payload) => {
-    const { data } = await axios.post(apiBaseUrl + "signup", payload);
+    const { data } = await axios.post(apiBaseUrl + "signup", payload, {
+      headers: {
+        auth: {
+          accessToken: localStorage.getItem("accessToken"),
+          refreshToken: localStorage.getItem("refreshToken"),
+        },
+      },
+    });
     console.log("data(in useAuth) : ", data);
   };
 
@@ -40,8 +52,15 @@ const useAuth = () => {
       setIsAuth(false);
     }
   }, 300);
-
-  return { isAuth, postLogin, postSignup, removeTokens };
+  return {
+    isAuth,
+    postLogin,
+    postSignup,
+    removeTokens,
+    setTokens,
+    getTokens,
+    setIsAuth,
+  };
 };
 
 export default useAuth;

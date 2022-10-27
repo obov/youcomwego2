@@ -1,7 +1,8 @@
-const Comment = ({ commentId, meetingId, userId, nickname, content }) => {
+const Comment = ({ commentId, meetingId, userId, nickname, comment }) => {
+  console.log("props,", commentId, meetingId, userId, nickname, comment);
   return (
     <div className="w-full border rounded-sm border-lime-400 px-4 py-1 flex justify-between">
-      <div>{content}</div>
+      <div>{comment}</div>
       <div className="flex gap-2">
         <div className="cursor-pointer">
           <svg

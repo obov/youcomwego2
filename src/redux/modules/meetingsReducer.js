@@ -5,38 +5,36 @@ import { getToken, setGroups, setStatus } from "../util";
 const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 const initialMeetings = [
-  {
-    meetingId: 1,
-    userId: 1,
-    nickname: "test",
-    imageUrl: ["/assets/default.jpg"],
-    title: "너만 오면",
-    likeCount: 1,
-    participateCount: 3,
-
-    Like: [
-      {
-        meetingId: 1,
-        userId: 1,
-      },
-    ],
-  },
-  {
-    meetingId: 2,
-    userId: 1,
-    nickname: "test",
-    imageUrl: ["/assets/default.jpg"],
-    title: "너가 안오면",
-    likeCount: 1,
-    participateCount: 0,
-
-    Like: [
-      {
-        meetingId: 2,
-        userId: 1,
-      },
-    ],
-  },
+  // {
+  //   meetingId: 1,
+  //   userId: 1,
+  //   nickname: "test",
+  //   imageUrl: ["/assets/default.jpg"],
+  //   title: "너만 오면",
+  //   likeCount: 1,
+  //   participateCount: 3,
+  //   Like: [
+  //     {
+  //       meetingId: 1,
+  //       userId: 1,
+  //     },
+  //   ],
+  // },
+  // {
+  //   meetingId: 2,
+  //   userId: 1,
+  //   nickname: "test",
+  //   imageUrl: ["/assets/default.jpg"],
+  //   title: "너가 안오면",
+  //   likeCount: 1,
+  //   participateCount: 0,
+  //   Like: [
+  //     {
+  //       meetingId: 2,
+  //       userId: 1,
+  //     },
+  //   ],
+  // },
 ];
 
 export const getMeetings = createAsyncThunk(
@@ -44,7 +42,7 @@ export const getMeetings = createAsyncThunk(
   async () => {
     const data = await (
       await fetch(apiBaseUrl + "meetings", {
-        headers: { Auth: JSON.stringify(getToken()) },
+        headers: { auth: JSON.stringify(getToken()) },
       })
     ).json();
     return data;
@@ -112,7 +110,7 @@ const meetings = createSlice({
       return setStatus(state, "loading");
     });
     builder.addCase(getMeetings.fulfilled, (state, action) => {
-      return setStatus({ ...state, data: action.payload }, "fulfilled");
+      return setStatus({ ...state, ...action.payload }, "fulfilled");
     });
 
     // builder.addCase(postNewTodo.rejected, (state, action) => {
