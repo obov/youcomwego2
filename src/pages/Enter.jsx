@@ -1,36 +1,25 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { regOptEnter } from "../utils/validate";
-import { useDispatch } from "react-redux";
 import useAuth from "../hooks/useAuth";
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Kakao from "../icons/kakao";
 import Google from "../icons/google";
-import axios from "axios";
 import { useEffect } from "react";
-import { resetMeetings } from "../redux/modules/meetingsReducer";
 
 const Enter = () => {
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
   const navigate = useNavigate();
   const { postLogin, isAuth, postSignup } = useAuth();
-  const dispatch = useDispatch();
   const [isLoging, setIsLoging] = useState(true);
-  const handleClickKakao = async () => {
-    // const res = await (await fetch(apiBaseUrl + "kakao")).json();
-    // console.log(res);
+  const handleClickKakao = () => {
     window.location.href = apiBaseUrl + "kakao";
+  };
+  const handleClickGoogle = () => {
+    window.location.href = apiBaseUrl + "google";
   };
   const handleClick = () => {
     setIsLoging(!isLoging);
-  };
-  const handleClickLogin = (e) => {
-    e.preventDefault();
-    setIsLoging(true);
-  };
-  const handleClickSiginup = (e) => {
-    e.preventDefault();
-    setIsLoging(false);
   };
   const {
     register,
@@ -222,7 +211,7 @@ const Enter = () => {
         *소셜계정으로 간편 로그인*
         <div className="w-3/4 mt-4 mx-auto flex justify-around">
           <Kakao onClick={handleClickKakao} />
-          <Google />
+          <Google onClick={handleClickGoogle} />
         </div>
       </div>
     </>

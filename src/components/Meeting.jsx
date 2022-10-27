@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const Meeting = ({
   main,
   mypage,
-  meeting: { meetingId, nickname, title, likeCount, participateCount },
+  meeting: { meetingId, nickname, title, likeCount, participateCount, images },
 }) => {
   const [interaction, setInteraction] = useState({
     like: likeCount,
@@ -67,7 +67,11 @@ const Meeting = ({
         <div className="flex gap-2 justify-around w-full">
           <div>
             <img
-              src="https://picsum.photos/300/240"
+              src={
+                images.length === 0
+                  ? "https://picsum.photos/300/240"
+                  : images[0]
+              }
               width={300}
               height={240}
               className="cursor-pointer"
