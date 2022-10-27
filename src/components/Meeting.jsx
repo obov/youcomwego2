@@ -1,17 +1,59 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMeetings } from "../redux/modules/meetingsReducer";
+import axios from "axios";
+import { getToken } from "../redux/util";
+import { useEffect, useState } from "react";
 const Meeting = ({
   main,
   mypage,
   meeting: { meetingId, nickname, title, likeCount, participateCount },
 }) => {
+  const [interaction, setInteraction] = useState({
+    like: likeCount,
+    join: participateCount,
+  });
+  const [isClicked, setIsClicked] = useState({
+    like: false,
+    join: false,
+  });
+  console.log(nickname);
+  const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const handleClickLike = async () => {
+    const { data } = await axios.put(
+      apiBaseUrl + "likes/" + meetingId,
+      { meetingId },
+      {
+        headers: { auth: JSON.stringify(getToken()) },
+      }
+    );
+    setIsClicked((cur) => ({ ...cur, like: !cur.like }));
+  };
+  const handleClickJoin = async () => {
+    const { data } = await axios.put(
+      apiBaseUrl + "participates/" + meetingId,
+      { meetingId },
+      {
+        headers: { auth: JSON.stringify(getToken()) },
+      }
+    );
+    setIsClicked((cur) => ({ ...cur, join: !cur.join }));
+  };
   const handleClickImg = () => {
     navigate(`/meeting/${meetingId}`);
     dispatch(selectMeetings({ meetingId }));
   };
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get(apiBaseUrl + "meetings/" + meetingId, {
+        headers: { auth: JSON.stringify(getToken()) },
+      });
+      console.log("clicked", data);
+      setInteraction({ like: data.likeCount, join: data.participateCount });
+    })();
+  }, [isClicked]);
   if (main)
     return (
       <div className="w-96 h-80 flex flex-col justify-around items-center bg-stone-200 p-2 rounded-lg gap-2">
@@ -33,7 +75,10 @@ const Meeting = ({
             />
           </div>
           <div className=" flex flex-col gap-4 justify-center">
-            <button className="flex gap-1 flex-col rounded-2xl p-1 ease-in-out transition-all active:bg-stone-500 bg-stone-50">
+            <button
+              onClick={handleClickLike}
+              className="flex gap-1 flex-col rounded-2xl p-1 ease-in-out transition-all active:bg-stone-500 bg-stone-50"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -46,7 +91,10 @@ const Meeting = ({
                 {likeCount}
               </div>
             </button>
-            <button className="flex gap-1 flex-col rounded-2xl p-1 ease-in-out transition-all active:bg-stone-500 bg-stone-50">
+            <button
+              onClick={handleClickJoin}
+              className="flex gap-1 flex-col rounded-2xl p-1 ease-in-out transition-all active:bg-stone-500 bg-stone-50"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -100,7 +148,7 @@ const Meeting = ({
                 <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
               </svg>
               <div className="w-full flex justify-center text-2xl">
-                {likeCount}
+                {interaction.like}
               </div>
             </button>
             <button className="flex gap-1 flex-col rounded-2xl p-1 ease-in-out transition-all active:bg-stone-500 bg-stone-50">
@@ -119,7 +167,7 @@ const Meeting = ({
                 />
               </svg>
               <div className="w-full flex justify-center text-2xl">
-                {participateCount}
+                {interaction.join}
               </div>
             </button>
           </div>

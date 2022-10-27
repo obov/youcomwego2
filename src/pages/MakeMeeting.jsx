@@ -18,9 +18,16 @@ const MakeMeeting = () => {
     const { data } = await axios.post(apiBaseUrl + "meetings", payload, {
       headers,
     });
-    if (data.message === "게시글이 생성되었습니다") {
-    }
-    console.log("res : ", data);
+    const image = new FormData();
+    [...payload.photo].forEach((p) => {
+      image.append("image", p);
+    });
+    const { data: imgUpload } = await axios.post(
+      apiBaseUrl + "meetings/" + data.createmeeting.meetingId + "/images",
+      image,
+      { headers }
+    );
+    // console.log("res : ", imgUpload);
   };
   const handleClickSmallPreview = (previewIndex) => () => {
     setPreviews((cur) => ({ ...cur, selected: previewIndex }));
@@ -102,7 +109,7 @@ const MakeMeeting = () => {
           <input
             {...register("photo", {
               validate: (photoList) => {
-                return photoList.length < 2;
+                return photoList.length < 5;
               },
             })}
             accept="image/*"
