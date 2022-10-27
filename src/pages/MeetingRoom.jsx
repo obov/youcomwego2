@@ -5,47 +5,49 @@ import { useEffect } from "react";
 import { selectMeetings } from "../redux/modules/meetingsReducer";
 import { useState } from "react";
 import axios from "axios";
+import { getToken } from "../redux/util";
+import { useForm } from "react-hook-form";
 
 const MeetingRoom = () => {
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
   const { id } = useParams();
   const dispatch = useDispatch();
   const meetings = useSelector((state) => state.meetings);
-  const initComments = [
-    {
-      commentId: 1,
-      meetingId: 1,
-      userId: 1,
-      nickname: "test",
-      content: "댓글입니다",
-    },
-    {
-      commentId: 2,
-      meetingId: 1,
-      userId: 1,
-      nickname: "test",
-      content: "댓글입니다",
-    },
-    {
-      commentId: 3,
-      meetingId: 1,
-      userId: 1,
-      nickname: "test",
-      content: "댓글입니다",
-    },
-  ];
-  const [comments, setComments] = useState(initComments);
+
+  const [comments, setComments] = useState([]);
+  const { register, handleSubmit, reset } = useForm();
+
+  const onValid = ({ comment }) => {
+    const req = async () => {
+      const { data } = await axios.post(
+        apiBaseUrl + "comments/" + id,
+        {
+          comment,
+        },
+        { headers: { auth: JSON.stringify(getToken()) } }
+      );
+    };
+    req();
+    setComments((cur) => [...cur, comment]);
+    reset();
+  };
   useEffect(() => {
     if (meetings.data.length > 0 && !meetings.selected) {
       dispatch(selectMeetings({ meetingId: +id }));
     }
   }, [meetings]);
-  useEffect(async () => {
-    const { data } = await axios(apiBaseUrl + "comments/");
-  }, []);
-  const { selected } = meetings;
+  useEffect(() => {
+    const func = async () => {
+      const { data } = await axios(apiBaseUrl + "comments/" + id, {
+        headers: { auth: JSON.stringify(getToken()) },
+      });
+      setComments((cur) => [...data.result]);
+    };
+    func();
+  }, [comments.length]);
 
-  console.log(selected);
+  const { selected } = meetings;
+  console.log(comments);
   return (
     <div className="flex flex-col gap-2 px-2">
       <h1 className="text-3xl">{selected?.title}</h1>
@@ -68,41 +70,47 @@ const MeetingRoom = () => {
           />
         ))}
       </div>
-      <div className="w-full h-40 border">some messages</div>
+      <div className="w-full h-40 border">{selected?.content}</div>
       <div className="flex flex-col h-full gap-2">
-        {comments.map((comment) => (
-          <Comment {...comment} />
+        {comments?.map((comment) => (
+          <Comment key={comment.commentId} {...comment} />
         ))}
-        <div className="flex flex-row justify-center gap-2 mt-2">
-          <input className="w-full py-2 px-3"
-          type="text" />
-          <button onClick={""}
+        <form
+          onSubmit={handleSubmit(onValid)}
+          className="flex flex-row justify-center gap-2 mt-2"
+        >
+          <input
+            className="w-full py-2 px-3"
+            type="text"
+            {...register("comment", { required: "comment required!" })}
+          />
+          <button
             className="bg-gray-800 hover:bg-black text-white font-bold w-10
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-          >          
+          >
             등록
           </button>
-        </div>
+        </form>
         <div className="flex flex-row justify-center gap-2 mt-2">
-          <button onClick={""}
+          <button
             className="bg-gray-800 hover:bg-black text-white font-bold w-10
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-          >          
+          >
             수정
           </button>
-          <button onClick={""}
+          <button
             className="bg-gray-800 hover:bg-black text-white font-bold w-10
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-          >          
+          >
             목록
           </button>
-          <button onClick={""}
+          <button
             className="bg-gray-800 hover:bg-black text-white font-bold w-10
             rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-          >          
+          >
             삭제
           </button>
-        </div>  
+        </div>
       </div>
     </div>
   );

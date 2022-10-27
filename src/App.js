@@ -17,14 +17,15 @@ import { getMeetings, resetMeetings } from "./redux/modules/meetingsReducer";
 import "tailwindcss/tailwind.css";
 import useAuth from "./hooks/useAuth";
 import SocialLanding from "./pages/SocialLanding";
+import { getToken } from "./redux/util";
 
 export const PATHS = {
   INDEX: "/",
-  ENTER: "enter",
-  MYPAGE: "mypage",
+  ENTER: "/enter",
+  MYPAGE: "/mypage",
   MEETING: {
-    toString: () => "meeting",
-    MAKE: "meeting/make",
+    toString: () => "/meeting",
+    MAKE: "/meeting/make",
   },
 };
 function App() {
@@ -32,19 +33,29 @@ function App() {
   const { pathname } = useLocation();
   const { isAuth } = useAuth();
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   if (pathname !== "/enter") {
-  //     dispatch(getMeetings());
-  //   } else {
-  //     dispatch(resetMeetings());
-  //   }
-  // }, [pathname, dispatch]);
+  useEffect(() => {
+    if (pathname !== "/enter") {
+      dispatch(getMeetings());
+    } else {
+      dispatch(resetMeetings());
+    }
+  }, [pathname, dispatch]);
   // 테스트할때는 주석처리
-  useLayoutEffect(() => {
-    if (!isAuth) {
+  useEffect(() => {
+    if (
+      !(getToken().accessToken && getToken().refreshToken) &&
+      !pathname.includes("/enter")
+    ) {
       navigate("/enter", { replace: true });
     }
   }, [isAuth, pathname]);
+  // useLayoutEffect(() => {
+  //   if (!isAuth) {
+  //     console.log(isAuth);
+  //     console.log("effect2");
+  //     navigate("/enter", { replace: true });
+  //   }
+  // }, [isAuth, pathname]);
   return (
     <Layout>
       <Routes>

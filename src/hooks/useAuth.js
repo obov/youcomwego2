@@ -26,7 +26,14 @@ const useAuth = () => {
     }
   };
   const postSignup = async (payload) => {
-    const { data } = await axios.post(apiBaseUrl + "signup", payload);
+    const { data } = await axios.post(apiBaseUrl + "signup", payload, {
+      headers: {
+        auth: {
+          accessToken: localStorage.getItem("accessToken"),
+          refreshToken: localStorage.getItem("refreshToken"),
+        },
+      },
+    });
     console.log("data(in useAuth) : ", data);
   };
 
@@ -45,10 +52,15 @@ const useAuth = () => {
       setIsAuth(false);
     }
   }, 300);
-  useEffect(() => {
-    console.log(isAuth);
-  }, [isAuth]);
-  return { isAuth, postLogin, postSignup, removeTokens, setTokens, getTokens };
+  return {
+    isAuth,
+    postLogin,
+    postSignup,
+    removeTokens,
+    setTokens,
+    getTokens,
+    setIsAuth,
+  };
 };
 
 export default useAuth;

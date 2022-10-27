@@ -90,7 +90,7 @@ const Meeting = ({
             />
           </div>
           <div className=" flex flex-col gap-4 justify-center">
-            <button className="flex gap-1 flex-col rounded-2xl p-1 ease-in-out transition-all active:bg-stone-500 bg-stone-50">
+            <button className="flex gap-1 flex-col rounded-2xl p-1so ease-in-out transition-all active:bg-stone-500 bg-stone-50">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

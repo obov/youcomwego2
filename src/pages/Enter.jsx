@@ -7,6 +7,8 @@ import { useNavigate, useNavigation } from "react-router-dom";
 import Kakao from "../icons/kakao";
 import Google from "../icons/google";
 import axios from "axios";
+import { useEffect } from "react";
+import { resetMeetings } from "../redux/modules/meetingsReducer";
 
 const Enter = () => {
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -34,21 +36,33 @@ const Enter = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const {
     register: registerSignUp,
     handleSubmit: handleSubmitSignUp,
     watch,
     formState: { errors: errosSignUp },
+    reset: resetSignup,
   } = useForm();
   const password = watch("password");
   const onValid = (data) => {
     postLogin(data);
+    reset();
   };
   const onValidSignUp = (data) => {
-    console.log("data : ", data);
     postSignup(data);
+    resetSignup();
   };
+  useEffect(() => {
+    reset();
+    resetSignup();
+  }, [isLoging]);
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/", { replace: true });
+    }
+  }, [isAuth]);
   return (
     <>
       {isLoging ? (

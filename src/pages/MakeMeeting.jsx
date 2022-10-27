@@ -10,7 +10,7 @@ const MakeMeeting = () => {
   const [previews, setPreviews] = useState({ contentUrls: [], selected: 0 });
   const { register, handleSubmit, watch, setValue } = useForm();
   const { getTokens } = useAuth();
-  const headers = { Auth: JSON.stringify(getTokens) };
+  const headers = { auth: JSON.stringify(getTokens) };
 
   const photo = watch("photo"); //Filelist
   const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -20,7 +20,7 @@ const MakeMeeting = () => {
     });
     if (data.message === "게시글이 생성되었습니다") {
     }
-    console.log("res : ", data); //API를 바꿔야할듯?
+    console.log("res : ", data);
   };
   const handleClickSmallPreview = (previewIndex) => () => {
     setPreviews((cur) => ({ ...cur, selected: previewIndex }));
